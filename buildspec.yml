@@ -11,5 +11,7 @@ phases:
       - npm run build
 artifacts:
   files:
-    - '**/*'
-  base-directory: build
+    - 'appspec.yml'
+    - 'scripts/**/*'
+    - 'build/**/*'
+    - 'package.json'
