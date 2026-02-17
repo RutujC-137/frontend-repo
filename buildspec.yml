@@ -1,0 +1,40 @@
+version: 0.2
+
+# ─────────────────────────────────────────────────────────────
+# FRONTEND — Single buildspec.yml for ALL 4 environments
+#
+# This file is used by ALL frontend CodeBuild projects:
+#   frontend-dev-build     → APP_ENV=dev
+#   frontend-qa-build      → APP_ENV=qa
+#   frontend-preprod-build → APP_ENV=preprod
+#   frontend-prod-build    → APP_ENV=prod
+#
+# In each CodeBuild project, set ONE environment variable:
+#   Name  : APP_ENV
+#   Value : dev   (or qa / preprod / prod)
+#
+# This triggers the matching npm build script:
+#   npm run build:dev     → reads .env.dev     → bakes DEV api url into bundle
+#   npm run build:qa      → reads .env.qa      → bakes QA api url into bundle
+#   npm run build:preprod → reads .env.preprod → bakes PREPROD api url into bundle
+#   npm run build:prod    → reads .env.prod    → bakes PROD api url into bundle
+# ─────────────────────────────────────────────────────────────
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - echo "Installing dependencies..."
+      - npm install
+
+  build:
+    commands:
+      - echo "APP_ENV is set to -- $APP_ENV --"
+      - npm run build:$APP_ENV
+      - echo "Build complete for environment -- $APP_ENV --"
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: build
