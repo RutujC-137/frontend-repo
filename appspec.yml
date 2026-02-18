@@ -7,16 +7,16 @@ files:
 
 hooks:
   ApplicationStop:
-    - location: stop.sh
+    - location: Application_Stop.sh
       timeout: 300
       runas: root
 
   AfterInstall:
-    - location: install.sh
+    - location: After_Install.sh
       timeout: 300
       runas: root
 
   ApplicationStart:
-    - location: start.sh
+    - location: Application_Start.sh
       timeout: 300
       runas: root
