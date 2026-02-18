@@ -1,10 +1,22 @@
 version: 0.0
 os: linux
+
 files:
   - source: /
     destination: /var/www/frontend
+
 hooks:
-  AfterInstall:
-    - location: scripts/install.sh
+  ApplicationStop:
+    - location: stop.sh
       timeout: 300
-      runas: ubuntu
+      runas: root
+
+  AfterInstall:
+    - location: install.sh
+      timeout: 300
+      runas: root
+
+  ApplicationStart:
+    - location: start.sh
+      timeout: 300
+      runas: root
