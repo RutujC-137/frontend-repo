@@ -1,20 +1,23 @@
-version: 0.0
+version: 0.2
+
 phases:
   install:
     runtime-versions:
       nodejs: 18
     commands:
-      - echo "Installing"
-  pre_build: 
-    commands:
-      - echo Installing source NPM dependencies...
-      - npm install -f
+      - echo "Installing dependencies"
+      - npm install
+
   build:
     commands:
-      - echo Build started on `date`
-      - cd ${PATH}
-      - echo Compiling the Node.js code
+      - echo "Build started on $(date)"
       - npm run build:dev
+
   post_build:
     commands:
-      - echo build Completed on `date`
+      - echo "Build completed on $(date)"
+
+artifacts:
+  base-directory: build
+  files:
+    - '**/*'
