@@ -21,4 +21,5 @@ phases:
 artifacts:
   files:
     - '**/*'
-  base-directory: build
+  exclude-paths:
+    - 'node_modules/**/*'
