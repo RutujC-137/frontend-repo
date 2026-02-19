@@ -3,7 +3,6 @@ echo "Installing dependencies"
 
 cd /var/www/frontend
 
-# Remove the old build folder
-rm -rf build node_modules
+# Remove old node_modules to ensure a clean install
+rm -rf node_modules
 npm install
-npm run build:dev
